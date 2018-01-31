@@ -1,0 +1,15 @@
+#Login {
+  margin-top: 200px; }
+  #Login form {
+    border-radius: 16px;
+    padding: 50px;
+    box-shadow: 0px 0px 30px #FFF3; }
+  #Login h2 {
+    margin-bottom: 50px; }
+  #Login input {
+    color: #FFF; }
+  #Login .footer {
+    text-align: left;
+    margin-top: 30px; }
+    #Login .footer a {
+      float: right; }

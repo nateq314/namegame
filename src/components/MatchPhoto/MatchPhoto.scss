@@ -1,0 +1,166 @@
+#MatchPhoto {
+	display: grid;
+	grid-template-rows: 100px 26vw  auto;
+	grid-template-columns: 200px 200px 1fr 1fr 1fr;
+	grid-template-areas:
+		"gameTimer turnTimer stats stats stats"
+		"currentMatch currentMatch currentMatch currentMatch currentMatch"
+		"finishedMatches finishedMatches finishedMatches finishedMatches finishedMatches";
+	align-content: stretch;
+	justify-content: stretch;
+	height: 100%;
+
+	#currentMatch {
+		grid-area: currentMatch;
+		border-bottom: 1px solid #666;
+	}
+
+	.title {
+		margin-top: 40px;
+		margin-bottom: 45px;
+	}
+
+	#photos {
+		li {
+			display: inline-block;
+			margin: 0px 1vw;
+			position: relative;
+
+			&.incorrect .overlay {
+				opacity: 1.0;
+				background-color: unset;
+				
+				img {
+					width: 60%;
+					height: 60%;
+					margin-top: 20%;
+					opacity: 0.7;
+				}
+			}
+			&.correct .overlay {
+				opacity: 1.0;
+				img { top: 8px; }
+			}
+
+			.image-container {
+				img {
+					height: 12vw;
+					width: 12vw;
+					object-fit: cover;
+				}
+			}
+
+			.overlay {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 12vw;
+				transition: 0.5s background-color;
+				background-color: rgba(0, 0, 0, 0.2);
+				opacity: 0;
+				transition: opacity 250ms;
+
+				img {
+					width: 100%;
+					height: 12vw;
+					object-fit: cover;					
+					position: relative;
+				}
+			}
+		}
+	}
+
+	#gameTimer { grid-area: gameTimer; }
+	#turnTimer { grid-area: turnTimer; }
+	#gameTimer, #turnTimer {
+		border-bottom: 1px solid #666;
+		border-right: 1px solid #666;
+		text-align: center;
+		padding: 0px;
+		font-size: 3.0em;
+
+		label {
+			display: block;
+			font-size: 14pt;
+			padding-top: 5px;
+			margin-bottom: -5px;
+		}
+	}
+
+	#stats {
+		grid-area: stats;
+		text-align: left;
+		padding: 18px 20px;
+		border-bottom: 1px solid #666;
+
+		.stat-group {
+			float: right;
+			margin-right: 0px;
+
+			&.one {
+				label { width: 160px; }
+			}
+			&.two {
+				label { width: 210px; }
+			}
+			&.three {
+				label { width: 180px; }
+			}
+		}
+		.stat {
+			display: block;
+			font-size: 1.0em;
+			margin-bottom: 10px;
+		}
+		label {
+			margin-right: 10px;
+			font-size: 1.1em;
+			display: inline-block;
+			text-align: right;
+		}
+	}
+
+	#finishedMatches {
+		padding: 30px;
+		grid-area: finishedMatches;
+
+		.match {
+			text-align: left;
+			margin-bottom: 20px;
+			background-color: rgba(#FFF, 0.1);
+
+			img {
+				float: left;
+				height: 72px;
+				width: 72px;
+				object-fit: cover;
+				vertical-align: middle;
+				margin-right: 12px;
+			}
+			.name, .position, .time_tries {
+				display: block;
+			}
+			.name {
+				padding-top: 5px;
+				display: block;
+				font-size: 1.1em;
+				color: rgb(253, 247, 223);
+			}
+			.position {
+				font-size: 0.8em;
+				padding-bottom: 2px;
+			}
+			.time_tries {
+				color: #888;
+				font-size: 0.8em;
+				padding-bottom: 5px;
+
+				.numtries.over {
+					color: #F00;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}

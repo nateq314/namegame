@@ -1,0 +1,96 @@
+#NameGame {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	grid-template-columns: 300px 1fr;
+	grid-template-areas:
+		"header header"
+		"sidebar app";
+	height: 100vh;
+}
+
+#header, #sidebar, #app {
+	// border: 1px solid #666;
+}
+
+#header {
+	grid-area: header;
+	background-color: #222;
+	border-bottom: 1px solid #666;
+
+	li.disabled a {
+		color: #666;
+		cursor: default;
+	}
+	li.active {
+		background-color: #544B72;
+	}
+	.right {
+		.label {
+			margin-right: 10px;
+			color: #999;
+		}
+		.user_email {
+			color: #FF7C40;
+		}
+		.btn {
+			background-color: #444;
+		}
+		#acct-info a {
+			cursor: default;
+		}
+	}
+}
+
+#sidebar {
+	grid-area: sidebar;
+	border-right: 1px solid #666;
+	padding: 20px 20px 20px 20px;
+
+	#numturns-selector {
+		text-align: left;
+		label {
+			font-size: 1.2em;
+		}
+		p {
+			margin: 0px;
+
+			input[type="range"] {
+				border: none;
+				// width: 100%;
+			}
+		}
+	}
+	.switch {
+		padding: 20px 0px;
+		text-align: left;
+
+		label {
+			.left-side, .right-side {
+				font-size: 1.2em;
+			}
+			.left-side {
+				display: inline-block;
+				width: 75px;
+				text-align: right;
+			}
+			.lever {
+				width: 68px;
+				background-color: #424242;
+			}
+			input[type="checkbox"]:checked + .lever {
+				background-color: #84c7c1;
+			}
+			input[type="checkbox"]:checked + .lever::before, input[type="checkbox"]:checked + .lever::after {
+				left: 50px;
+			}
+		}
+	}
+}
+
+#app {
+	grid-area: app;
+	overflow-x: hidden;
+}
+
+ul#mode-select {
+}

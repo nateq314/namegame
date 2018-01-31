@@ -1,0 +1,118 @@
+#MatchPhoto {
+  display: grid;
+  grid-template-rows: 100px 26vw  auto;
+  grid-template-columns: 200px 200px 1fr 1fr 1fr;
+  grid-template-areas: "gameTimer turnTimer stats stats stats" "currentMatch currentMatch currentMatch currentMatch currentMatch" "finishedMatches finishedMatches finishedMatches finishedMatches finishedMatches";
+  align-content: stretch;
+  justify-content: stretch;
+  height: 100%; }
+  #MatchPhoto #currentMatch {
+    grid-area: currentMatch;
+    border-bottom: 1px solid #666; }
+  #MatchPhoto .title {
+    margin-top: 40px;
+    margin-bottom: 45px; }
+  #MatchPhoto #photos li {
+    display: inline-block;
+    margin: 0px 1vw;
+    position: relative; }
+    #MatchPhoto #photos li.incorrect .overlay {
+      opacity: 1.0;
+      background-color: unset; }
+      #MatchPhoto #photos li.incorrect .overlay img {
+        width: 60%;
+        height: 60%;
+        margin-top: 20%;
+        opacity: 0.7; }
+    #MatchPhoto #photos li.correct .overlay {
+      opacity: 1.0; }
+      #MatchPhoto #photos li.correct .overlay img {
+        top: 8px; }
+    #MatchPhoto #photos li .image-container img {
+      height: 12vw;
+      width: 12vw;
+      object-fit: cover; }
+    #MatchPhoto #photos li .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 12vw;
+      transition: 0.5s background-color;
+      background-color: rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transition: opacity 250ms; }
+      #MatchPhoto #photos li .overlay img {
+        width: 100%;
+        height: 12vw;
+        object-fit: cover;
+        position: relative; }
+  #MatchPhoto #gameTimer {
+    grid-area: gameTimer; }
+  #MatchPhoto #turnTimer {
+    grid-area: turnTimer; }
+  #MatchPhoto #gameTimer, #MatchPhoto #turnTimer {
+    border-bottom: 1px solid #666;
+    border-right: 1px solid #666;
+    text-align: center;
+    padding: 0px;
+    font-size: 3.0em; }
+    #MatchPhoto #gameTimer label, #MatchPhoto #turnTimer label {
+      display: block;
+      font-size: 14pt;
+      padding-top: 5px;
+      margin-bottom: -5px; }
+  #MatchPhoto #stats {
+    grid-area: stats;
+    text-align: left;
+    padding: 18px 20px;
+    border-bottom: 1px solid #666; }
+    #MatchPhoto #stats .stat-group {
+      float: right;
+      margin-right: 0px; }
+      #MatchPhoto #stats .stat-group.one label {
+        width: 160px; }
+      #MatchPhoto #stats .stat-group.two label {
+        width: 210px; }
+      #MatchPhoto #stats .stat-group.three label {
+        width: 180px; }
+    #MatchPhoto #stats .stat {
+      display: block;
+      font-size: 1.0em;
+      margin-bottom: 10px; }
+    #MatchPhoto #stats label {
+      margin-right: 10px;
+      font-size: 1.1em;
+      display: inline-block;
+      text-align: right; }
+  #MatchPhoto #finishedMatches {
+    padding: 30px;
+    grid-area: finishedMatches; }
+    #MatchPhoto #finishedMatches .match {
+      text-align: left;
+      margin-bottom: 20px;
+      background-color: rgba(255, 255, 255, 0.1); }
+      #MatchPhoto #finishedMatches .match img {
+        float: left;
+        height: 72px;
+        width: 72px;
+        object-fit: cover;
+        vertical-align: middle;
+        margin-right: 12px; }
+      #MatchPhoto #finishedMatches .match .name, #MatchPhoto #finishedMatches .match .position, #MatchPhoto #finishedMatches .match .time_tries {
+        display: block; }
+      #MatchPhoto #finishedMatches .match .name {
+        padding-top: 5px;
+        display: block;
+        font-size: 1.1em;
+        color: #fdf7df; }
+      #MatchPhoto #finishedMatches .match .position {
+        font-size: 0.8em;
+        padding-bottom: 2px; }
+      #MatchPhoto #finishedMatches .match .time_tries {
+        color: #888;
+        font-size: 0.8em;
+        padding-bottom: 5px; }
+        #MatchPhoto #finishedMatches .match .time_tries .numtries.over {
+          color: #F00;
+          font-weight: bold; }
