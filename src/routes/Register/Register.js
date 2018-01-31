@@ -18,7 +18,7 @@ export default ({ displayError }) => (
 	<div id="Register" className="row">
 		<div className="col s4 offset-s4">
 			<form onSubmit={registerFormOnSubmit}>
-			<h3>Registration Form</h3>
+			<h3>Registration</h3>
 			<p>
 				<label htmlFor="email">Email:</label>
 				<input type="text" id="email" ref={(input) => { email = input; }} />

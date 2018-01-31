@@ -15,7 +15,7 @@ export default () => (
   <div id="Login" className="row">
     <div className="col s4 offset-s4">
       <form onSubmit={loginFormOnSubmit}>
-        <h2>Welcome to the Name Game!</h2>
+        <h3>Welcome to the Name Game!</h3>
         <p>
           <label htmlFor="email">Email:</label>
           <input type="text" id="email" ref={(input) => { email = input; }} />
