@@ -53,7 +53,7 @@ class Search extends React.Component {
 				// cache this in state so we don't have to recalculate it on every single re-render
 				searchResultsNumCurrentEmployees: newSearchResults.filter(person => person.jobTitle).size
 			});
-		}, 250);
+		}, 300);
 	}
 
 	columnHeaderOnClick(e) {
@@ -88,8 +88,8 @@ class Search extends React.Component {
 							onChange={this.searchInputOnChange}
 							value={searchText}
 							className="browser-default"
-							// placeholder="Enter Search Text Here"
 							placeholder="Search by First Name, Last Name, or Job Title"
+							autoFocus={true}
 						/>
 						<div id="info">
 							<span className="numResults"><span className="textLabel">Total Matches:</span><span className="stat">{searchResults.size}</span></span>
