@@ -1,0 +1,98 @@
+#Search {
+
+	.row#toprow {
+		margin: 0px 0px 50px 0px;		
+		background-color: #292929;
+
+		.col {
+			text-align: left;
+
+			#searchInput {
+				margin: 30px 0px;
+				font-size: 1.4em;
+				border: none;
+				background-color: #444;
+				border-radius: 4px;
+				line-height: 50px;
+				padding: 0px 15px;
+				width: 50%;
+				width: 497px;
+			}
+
+			#info {
+				text-align: right;
+				font-size: 1.25em;
+				float: right;
+				margin-top: 13px;
+			}
+			.numResults {
+				display: block;
+				
+				.textLabel {
+					margin-right: 5px;
+					color: #BBB;
+				}
+				.stat {
+					display: inline-block;
+					text-align: left;
+					width: 40px;
+				}
+			}
+		}
+	}
+
+	#peopleList {
+		tr {
+			// height: 100px;
+			// margin: 0px 0px 0px 0px;
+			border-bottom: 1px solid #444;
+
+			.pic {
+				img {
+					float: left;
+					width: 50px;
+					height: 50px;
+					object-fit: cover;
+					margin-right: 20px;
+				}
+			}
+			.firstname, .lastname, .position, .socialLinks {
+				text-align: left;
+				color: #DDD;
+				font-size: 1.25em;
+			}
+			.socialLinks {
+				.socialLink {
+
+					svg {
+						height: 40px;
+						margin-right: 16px;
+						fill: #FFF3;
+						position: relative;
+						top: 3px;
+					}
+				}
+			}
+		}
+	}
+
+	a.columnLabel {
+		cursor: pointer;
+		color: #FFF;
+	}
+
+	.sortIndicator {
+		margin-left: 8px;
+			position: relative;
+			top: 3px;
+
+		svg {
+			height: 16px;
+			fill: #FF7C40;
+		}
+	}
+
+	.searchMatch {
+		background-color: #506081;
+	}
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { auth } from '../../firebase';
 import MatchPhoto from '../../components/MatchPhoto/MatchPhoto';
+import Search from '../../components/Search/Search';
 import { List } from 'immutable';
 
 import './NameGame.css';
@@ -18,12 +19,12 @@ class NameGame extends React.Component {
 		this.modeOnSelect = this.modeOnSelect.bind(this);
 		this.numTurnsOnChange = this.numTurnsOnChange.bind(this);
 		this.settingOnToggle = this.settingOnToggle.bind(this);
-		this.games = [MatchPhoto];
+		this.games = [MatchPhoto, null, null, null, null, Search];
 		this.state = {
 			randomizedPeople: null,
-			mode: 0,
+			mode: 5,
 			settings: {
-				num_turns: 10,
+				num_turns: 130,
 				team_mode: false,
 				timed_mode: false,
 				hint_mode: false,
@@ -60,23 +61,37 @@ class NameGame extends React.Component {
 	}
 	
 	modeOnSelect(mode) {
-		this.setState({ mode });
+		const newState = { mode };
+		if (mode === 5) newState.settings = {
+			...this.state.settings,
+			num_turns: this.people.size
+		}
+		this.setState(newState);
 	}
 
 	render() {
 		const { randomizedPeople, mode, settings } = this.state;
 		const Game = this.games[mode];
 		return (
-			<div id="NameGame">
+			<div id="NameGame" style={{
+				gridTemplateAreas: mode === 5
+					? "'header header' 'app app'"
+					: "'header header' 'sidebar app'"
+			}}>
 				<nav id="header">
 					<div className="nav-wrapper">
 						<ul id="mode-select" className="left">
-							<li className={mode === 0 ? 'active' : ''}><a onClick={() => { this.modeOnSelect(0); }}>Photo Match</a></li>
+							<li className={mode === 0 ? 'active' : ''}>
+								<a onClick={() => { this.modeOnSelect(0); }}>Photo Match</a>
+							</li>
 							{/* No time to implement these other games! */}
 							<li className="disabled"><a onClick={null}>Name Match</a></li>
 							<li className="disabled"><a onClick={null}>Fill in the Name</a></li>
 							<li className="disabled"><a onClick={null}>Drag and Drop</a></li>
 							<li className="disabled"><a onClick={null}>Facemash!</a></li>
+							<li className={mode === 5 ? 'active' : ''}>
+								<a onClick={() => { this.modeOnSelect(5); }}>Search</a>
+							</li>
 						</ul>
 						<ul className="right">
 							<li id="acct-info">
@@ -89,7 +104,7 @@ class NameGame extends React.Component {
 						</ul>
 					</div>
 				</nav>
-				<div id="sidebar">
+				<div id="sidebar" style={{ display: mode === 5 ? 'none' : 'block'}}>
 					<div id="numturns-selector">
 						<label>Game Length (in # turns): {settings.num_turns}</label>
 						<p className="range-field">
