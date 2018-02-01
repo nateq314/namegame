@@ -22,9 +22,9 @@ class NameGame extends React.Component {
 		this.games = [MatchPhoto, null, null, null, null, Search];
 		this.state = {
 			randomizedPeople: null,
-			mode: 5,
+			mode: 0,
 			settings: {
-				num_turns: 130,
+				num_turns: 12,
 				team_mode: false,
 				timed_mode: false,
 				hint_mode: false,
