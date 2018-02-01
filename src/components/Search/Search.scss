@@ -54,6 +54,7 @@
 					height: 50px;
 					object-fit: cover;
 					margin-right: 20px;
+					cursor: zoom-in;
 				}
 			}
 			.firstname, .lastname, .position, .socialLinks {
@@ -99,5 +100,71 @@
 
 	.searchMatch {
 		background-color: #506081;
+	}
+
+	#detailsOverlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		transition: background-color 0.25s;
+
+		#details {
+			width: 650px;
+			margin: 25% auto 0px auto;
+			background-color: #333;
+			height: 240px;
+			position: relative;
+			padding: 20px;
+
+			img {
+				float: left;
+				width: 200px;
+				height: 200px;
+				object-fit: cover;
+				margin-right: 30px;
+			}
+
+			.name, .position, .socialLinks {
+				text-align: left;
+			}
+			.name {
+				font-size: 3.0em;
+				padding-top: 20px;
+				line-height: 50px;
+				margin-bottom: 10px;
+			}
+			.position {
+				font-size: 1.5em;
+				margin-bottom: 30px;
+			}
+			.socialLinks {
+				.socialLink {
+					svg {
+						fill: rgba(255, 255, 255, 0.5);
+						height: 40px;
+						transition: 250ms fill;
+
+						&:hover {
+							fill: #FFF;
+						}
+					}
+				}
+			}
+
+			#close {
+				cursor: pointer;
+				position: absolute;
+				top: 0px;
+				right: 0px;
+				padding: 0px 5px 2px 6px;
+				line-height: 22px;
+				color: rgba(255, 255, 255, 0.6);
+				border-left: 1px solid #666;
+				border-bottom: 1px solid #666;
+				font-size: 1.2em;
+			}
+		}
 	}
 }

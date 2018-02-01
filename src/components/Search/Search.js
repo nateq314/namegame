@@ -16,13 +16,18 @@ class Search extends React.Component {
 		super(props);
 		this.searchInputOnChange = this.searchInputOnChange.bind(this);
 		this.columnHeaderOnClick = this.columnHeaderOnClick.bind(this);
+		this.personOnClick = this.personOnClick.bind(this);
+		this.closeDetailsOnClick = this.closeDetailsOnClick.bind(this);
 
 		this.state = {
 			searchResults: props.people,
 			searchResultsNumCurrentEmployees: props.people.filter(person => person.jobTitle).size,
 			searchText: '',
 			sortCol: null,
-			sortDir: 'ASC'
+			sortDir: 'ASC',
+			showDetailsForIndex: null,
+			showTheDetails: false,
+			detailsOverlayOpacity: 0,
 		};
 	}
 
@@ -75,10 +80,55 @@ class Search extends React.Component {
 		});
 	}
 
+	personOnClick(e) {
+		console.log('personOnClick()');
+		const showDetailsForIndex = +e.currentTarget.id.split('-')[1];
+		this.setState({ showDetailsForIndex });
+		setTimeout(() => {
+			this.setState({ detailsOverlayOpacity: 0.7 });
+			setTimeout(() => {
+				this.setState({ showTheDetails: true });
+			}, 250);
+		}, 0);
+	}
+
+	closeDetailsOnClick() {
+		this.setState({
+			showDetailsForIndex: null,
+			showTheDetails: false,
+			detailsOverlayOpacity: 0
+		});
+	}
+
 	render() {
-		const { searchResults, searchText, sortCol, sortDir, searchResultsNumCurrentEmployees } = this.state;
+		const { searchResults, searchText, sortCol, sortDir, searchResultsNumCurrentEmployees,
+						showDetailsForIndex, detailsOverlayOpacity, showTheDetails
+					} = this.state;
+		console.log('state:', this.state);
+		const detailPerson = showDetailsForIndex !== null ? searchResults.get(showDetailsForIndex) : null;
 		return (
 			<div id="Search">
+				<div id="detailsOverlay" style={{
+					display: showDetailsForIndex !== null ? 'block' : 'none',
+					backgroundColor: `rgba(0, 0, 0, ${detailsOverlayOpacity})`
+				}}>
+					{showTheDetails && (
+						<div id="details">
+							<a id="close" onClick={this.closeDetailsOnClick}>x</a>
+							<img src={detailPerson.headshot.url || defaultImage} />
+							<div className="name">{fullName(detailPerson)}</div>
+							<div className="position">{detailPerson.jobTitle || '(ex-employee)'}</div>
+							<div className="socialLinks">
+								{detailPerson.socialLinks.map(link => (
+									<a className="socialLink" href={link.url}>
+										{link.type === 'google' && google}
+										{link.type === 'linkedin' && linkedin}
+									</a>
+								))}
+							</div>
+						</div>
+					)}
+				</div>
 				<div className="row" id="toprow">
 					<div className="col s8 offset-s2">
 						{/* <label htmlFor="searchInput">Search</label> */}
@@ -133,12 +183,14 @@ class Search extends React.Component {
 							</thead>
 							<tbody>
 								{searchResults.size > 0 ? (
-									searchResults.map(person => (
+									searchResults.map((person, idx) => (
 										<tr key={person.id}>
 											<td className="pic">
 												<img
 													src={person.headshot.url || defaultImage}
 													alt={person.headshot.alt || fullName(person)}
+													id={`resut-${idx}`}
+													onClick={this.personOnClick}
 												/>
 											</td>
 											<td
