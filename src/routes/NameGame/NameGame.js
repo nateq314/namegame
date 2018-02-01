@@ -172,7 +172,10 @@ class NameGame extends React.Component {
 					{this.people && (
 						<Game
 							settings={settings}
-							people={randomizedPeople.take(settings.num_turns)}
+							people={mode === 5
+								? this.people
+								: randomizedPeople.take(settings.num_turns)
+							}
 						/>
 					)}
 				</div>
@@ -211,10 +214,17 @@ class NameGame extends React.Component {
 				newState.randomizedPeople = List(
 					shuffle(
 						this.people
-							.filter(person => e.currentTarget.checked ? person.jobTitle : true)
+							.filter(person => setting === 'team_mode' && e.currentTarget.checked ? person.jobTitle : true)
 							.toArray()
 					)
 				);
+				if (
+					setting === 'team_mode' &&
+					e.currentTarget.checked &&
+					this.state.settings.num_turns > newState.randomizedPeople.size
+				) {
+					newState.settings.num_turns = newState.randomizedPeople.size;
+				}
 				this.setState(newState);
 			}
 			else e.currentTarget.checked = this.state.settings[setting];
