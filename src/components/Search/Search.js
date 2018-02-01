@@ -36,7 +36,7 @@ class Search extends React.Component {
 			this.debounceTimer = null;
 			const newSearchResults = this.props.people
 			.filter(person => {
-				const regex = RegExp(searchText.replace(/[^A-Za-z0-9 ]/g, '~'), 'i');
+				const regex = RegExp(searchText.replace(/[^A-Za-z0-9- ]/g, '~'), 'i');
 				return	regex.test(person.firstName) ||
 								regex.test(person.lastName) ||
 								regex.test(person.jobTitle || '(ex-employee)');
@@ -132,55 +132,63 @@ class Search extends React.Component {
 								</tr>
 							</thead>
 							<tbody>
-								{searchResults.map(person => (
-									<tr key={person.id}>
-										<td className="pic">
-											<img
-												src={person.headshot.url || defaultImage}
-												alt={person.headshot.alt || fullName(person)}
-											/>
-										</td>
-										<td
-											className="firstname"
-											dangerouslySetInnerHTML={{
-													__html: person.firstName
-														.replace(
-															RegExp(searchText.replace(/[^A-Za-z0-9 ]/g, '~'), 'i'),
-															`<span class="searchMatch">$&</span>`
-														)}}
-										>
-										</td>
-										<td
-											className="lastname"
-											dangerouslySetInnerHTML={{
-													__html: person.lastName
-														.replace(
-															RegExp(searchText.replace(/[^A-Za-z0-9 ]/g, '~'), 'i'),
-															`<span class="searchMatch">$&</span>`
-														)}}
-										>
-										</td>
-										<td
-											className="position"
-											dangerouslySetInnerHTML={{
-													__html: (person.jobTitle || '(ex-employee)')
-														.replace(
-															RegExp(searchText.replace(/[^A-Za-z0-9 ]/g, '~'), 'i'),
-															`<span class="searchMatch">$&</span>`
-														)}}
-										>
-										</td>
-										{/* <td className="position">{person.jobTitle || '(ex-employee)'}</td> */}
-										<td className="socialLinks">
-											{person.socialLinks.map(link => (
-												<a className="socialLink" href={link.url}>
-													{link.type === 'google' && google}
-													{link.type === 'linkedin' && linkedin}
-												</a>
-											))}
+								{searchResults.size > 0 ? (
+									searchResults.map(person => (
+										<tr key={person.id}>
+											<td className="pic">
+												<img
+													src={person.headshot.url || defaultImage}
+													alt={person.headshot.alt || fullName(person)}
+												/>
+											</td>
+											<td
+												className="firstname"
+												dangerouslySetInnerHTML={{
+														__html: person.firstName
+															.replace(
+																RegExp(searchText.replace(/[^A-Za-z0-9- ]/g, '~'), 'i'),
+																`<span class="searchMatch">$&</span>`
+															)}}
+											>
+											</td>
+											<td
+												className="lastname"
+												dangerouslySetInnerHTML={{
+														__html: person.lastName
+															.replace(
+																RegExp(searchText.replace(/[^A-Za-z0-9- ]/g, '~'), 'i'),
+																`<span class="searchMatch">$&</span>`
+															)}}
+											>
+											</td>
+											<td
+												className="position"
+												dangerouslySetInnerHTML={{
+														__html: (person.jobTitle || '(ex-employee)')
+															.replace(
+																RegExp(searchText.replace(/[^A-Za-z0-9- ]/g, '~'), 'i'),
+																`<span class="searchMatch">$&</span>`
+															)}}
+											>
+											</td>
+											{/* <td className="position">{person.jobTitle || '(ex-employee)'}</td> */}
+											<td className="socialLinks">
+												{person.socialLinks.map(link => (
+													<a className="socialLink" href={link.url}>
+														{link.type === 'google' && google}
+														{link.type === 'linkedin' && linkedin}
+													</a>
+												))}
+											</td>
+										</tr>
+									))
+								) : (
+									<tr id="noMatches">
+										<td colSpan={5}>
+											<h5>No matching records found</h5>
 										</td>
 									</tr>
-								))}
+								)}
 							</tbody>
 						</table>
 					</div>

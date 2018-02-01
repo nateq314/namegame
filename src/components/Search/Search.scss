@@ -74,6 +74,11 @@
 				}
 			}
 		}
+
+		#noMatches {
+			border-bottom: none;
+			h4, h5 { text-align: center; }
+		}
 	}
 
 	a.columnLabel {

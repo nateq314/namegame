@@ -47,6 +47,11 @@
     position: relative;
     top: 3px; }
 
+#Search #peopleList #noMatches {
+  border-bottom: none; }
+  #Search #peopleList #noMatches h4, #Search #peopleList #noMatches h5 {
+    text-align: center; }
+
 #Search a.columnLabel {
   cursor: pointer;
   color: #FFF; }
